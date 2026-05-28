@@ -37,10 +37,9 @@ ionic serve
 - Registro e inicio de sesión
 - Encuestas de videojuegos
 - GPS y ubicación
-Cámara y galería
-Consumo de API de videojuegos
-Cards con publicaciones
-Generación de QR
-Dashboard con Firebase Hosting
-API utilizada
-RAWG API
+- Cámara y galería
+- Consumo de API de videojuegos
+- Cards con publicaciones
+- Generación de QR
+- Dashboard con Firebase Hosting
+- API utilizada (RAWG API)
