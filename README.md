@@ -10,7 +10,7 @@ Firebase Storage
 Capacitor
 RAWG API
 
-# Creación del proyecto
+## Creación del proyecto
 ## 1. Crear el proyecto
 ionic start game-survey blank --type=angular
 
@@ -30,19 +30,13 @@ ionic serve
 
 - Agregar plataforma Android: npx cap add android
 - Compilar proyecto: ionic build
-
-## Sincronizar Capacitor:
-
-npx cap sync
-
-## Abrir Android Studio:
-
-npx cap open android
+- Sincronizar Capacitor: npx cap sync
+- Abrir Android Studio: npx cap open android
 
 # Funcionalidades
-Registro e inicio de sesión
-Encuestas de videojuegos
-GPS y ubicación
+- Registro e inicio de sesión
+- Encuestas de videojuegos
+- GPS y ubicación
 Cámara y galería
 Consumo de API de videojuegos
 Cards con publicaciones
