@@ -1,0 +1,40 @@
+// Quita el borde tosco del header para un look más "flat"
+ion-header {
+  box-shadow: none;
+}
+
+// Contenedor para centrar y dar aire en pantallas grandes (responsivo)
+.form-container {
+  max-width: 500px;
+  margin: 20px auto 0 auto;
+}
+
+// Estilizado moderno para cada fila de input
+.custom-item {
+  --background: var(--ion-color-light); // Fondo grisáceo claro muy sutil
+  --border-radius: 12px;                // Esquinas redondeadas modernas
+  margin-bottom: 16px;                  // Espaciado uniforme en lugar de <br>
+  --padding-start: 16px;
+  
+  ion-icon {
+    font-size: 1.3rem;
+    margin-right: 12px;
+  }
+}
+
+// Hacer que el botón se vea un poco más alto y cómodo para el pulgar
+ion-button {
+  height: 48px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.link {
+  color: var(--ion-color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  
+  &:hover, &:active {
+    text-decoration: underline;
+  }
+}
