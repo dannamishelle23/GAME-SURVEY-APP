@@ -1,32 +1,44 @@
-<ion-header>
-
-  <ion-toolbar>
-
-    <ion-title>
-      Game Survey Campus
-    </ion-title>
-
+<ion-header class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-title class="brand-title">Game Survey Campus</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding gaming-bg">
+  
+  <div class="main-container">
+    
+    <div class="welcome-card">
+      <div class="overlay"></div>
+      <div class="card-content">
+        <h1>Bienvenido 🎮</h1>
+        <p>Tu opinión cuenta en el campus. Gestiona y responde encuestas activas.</p>
+      </div>
+    </div>
 
-  <h1>
-    Bienvenido 🎮
-  </h1>
+    <div class="menu-container">
+      
+      <ion-button 
+        expand="block" 
+        routerLink="/new-survey" 
+        class="btn-action btn-primary-gradient">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Nueva Encuesta
+      </ion-button>
 
-  <p>
-    Ya iniciaste sesión correctamente.
-  </p>
+    </div>
 
-  <ion-button
-    expand="block"
-    color="danger"
-    (click)="logout()">
+    <div class="logout-wrapper">
+      <ion-button 
+        fill="clear" 
+        color="danger" 
+        (click)="logout()" 
+        class="btn-logout">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </div>
 
-    Cerrar Sesión
-
-  </ion-button>
+  </div>
 
 </ion-content>

@@ -1,0 +1,113 @@
+// Quitar la línea divisoria por defecto del header para un look limpio
+ion-header {
+  box-shadow: none;
+}
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  background: linear-gradient(45deg, #3880ff, #2dd36f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Contenedor principal para organizar el contenido verticalmente
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between; // Mueve el logout al fondo de la pantalla
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+// Tarjeta Hero de Bienvenida
+.welcome-card {
+  position: relative;
+  background: linear-gradient(135deg, #1e1e2f 0%, #111119 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  // Efecto de brillo de fondo sutil
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(56, 128, 255, 0.2) 0%, transparent 70%);
+    transform: rotate(45deg);
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+}
+
+// Contenedor de los botones de acción
+.menu-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Separa los botones de forma elegante
+}
+
+// Estilo base para los botones principales
+.btn-action {
+  --height: 56px; // Más alto, ideal para uso móvil
+  --border-radius: 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  
+  ion-icon {
+    font-size: 1.3rem;
+    margin-right: 8px;
+  }
+}
+
+// Botón con gradiente moderno para llamar la atención
+.btn-primary-gradient {
+  background: linear-gradient(90deg, #3880ff 0%, #0053e0 100%);
+  border-radius: 14px;
+  --background: transparent; // Permite ver el gradiente del contenedor padre
+}
+
+// Área del botón de salir
+.logout-wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-logout {
+  font-weight: 600;
+  font-size: 0.95rem;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  
+  ion-icon {
+    margin-right: 6px;
+  }
+}

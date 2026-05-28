@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
-import {
-  Router
-} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import {
+  IonIcon,
   IonContent,
   IonHeader,
   IonToolbar,
@@ -16,6 +15,9 @@ import {
   AuthService
 } from 'src/app/services/auth';
 
+import { addIcons } from 'ionicons';
+import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icons';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -26,7 +28,9 @@ import {
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonButton
+    IonButton,
+    IonIcon,
+    RouterLink
   ],
 })
 export class HomePage {
@@ -34,7 +38,13 @@ export class HomePage {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    addIcons({
+      addCircleOutline,
+      clipboardOutline,
+      logOutOutline
+    })
+  }
 
   async logout(){
 

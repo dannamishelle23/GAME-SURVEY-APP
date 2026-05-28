@@ -1,13 +1,127 @@
-<ion-header [translucent]="true">
+<ion-header>
+
   <ion-toolbar>
-    <ion-title>new-survey</ion-title>
+
+    <ion-title>
+      Nueva Encuesta
+    </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">new-survey</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <ion-input
+    label="Nombre o apodo"
+    labelPlacement="floating"
+    [(ngModel)]="apodo">
+  </ion-input>
+
+  <br>
+
+  <ion-input
+    label="Edad"
+    labelPlacement="floating"
+    [(ngModel)]="edad">
+  </ion-input>
+
+  <br>
+
+  <ion-select
+    label="Rol"
+    [(ngModel)]="rol">
+
+    <ion-select-option value="Estudiante">
+      Estudiante
+    </ion-select-option>
+
+    <ion-select-option value="Docente">
+      Docente
+    </ion-select-option>
+
+    <ion-select-option value="Administrativo">
+      Administrativo
+    </ion-select-option>
+
+    <ion-select-option value="Visitante">
+      Visitante
+    </ion-select-option>
+
+  </ion-select>
+
+  <br>
+
+  <ion-input
+    label="Videojuego Favorito"
+    labelPlacement="floating"
+    [(ngModel)]="videojuego">
+  </ion-input>
+
+  <br>
+
+  <ion-select
+    label="Plataforma"
+    [(ngModel)]="plataforma">
+
+    <ion-select-option value="PC">
+      PC
+    </ion-select-option>
+
+    <ion-select-option value="Consola">
+      Consola
+    </ion-select-option>
+
+    <ion-select-option value="Móvil">
+      Móvil
+    </ion-select-option>
+
+    <ion-select-option value="Navegador">
+      Navegador
+    </ion-select-option>
+
+  </ion-select>
+
+  <br>
+
+  <ion-select
+    label="Género"
+    [(ngModel)]="genero">
+
+    <ion-select-option value="Acción">
+      Acción
+    </ion-select-option>
+
+    <ion-select-option value="Aventura">
+      Aventura
+    </ion-select-option>
+
+    <ion-select-option value="RPG">
+      RPG
+    </ion-select-option>
+
+    <ion-select-option value="Terror">
+      Terror
+    </ion-select-option>
+
+  </ion-select>
+
+  <br>
+
+  <ion-textarea
+    label="Comentario"
+    labelPlacement="floating"
+    [(ngModel)]="comentario">
+  </ion-textarea>
+
+  <br>
+
+  <ion-button
+    expand="block"
+    (click)="saveSurvey()">
+
+    Guardar Encuesta
+
+  </ion-button>
+
 </ion-content>
