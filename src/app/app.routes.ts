@@ -29,4 +29,8 @@ export const routes: Routes = [
     path: 'surveys',
     loadComponent: () => import('./pages/surveys/surveys.page').then( m => m.SurveysPage)
   },
+  {
+    path: 'qr',
+    loadComponent: () => import('./pages/qr/qr.page').then( m => m.QrPage)
+  },
 ];

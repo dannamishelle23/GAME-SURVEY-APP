@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comparte la App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="qr-container">
+
+    <h2>Escanea para descargar o probar la app</h2>
+
+    <qrcode
+      [qrdata]="qrData"
+      [width]="220"
+      [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <p class="text">
+      Comparte este QR con estudiantes del campus
+    </p>
+
+  </div>
+
+</ion-content>

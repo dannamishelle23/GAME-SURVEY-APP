@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-
 import { NgIf, CommonModule } from '@angular/common';
 
 import {
@@ -19,7 +18,6 @@ import {
 import { ToastController } from '@ionic/angular';
 
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-
 import { Geolocation } from '@capacitor/geolocation';
 
 import { SurveyService } from 'src/app/services/survey';
@@ -28,7 +26,6 @@ import { SurveyService } from 'src/app/services/survey';
   selector: 'app-new-survey',
   templateUrl: './new-survey.page.html',
   standalone: true,
-
   imports: [
     IonContent,
     IonHeader,
@@ -41,7 +38,7 @@ import { SurveyService } from 'src/app/services/survey';
     IonSelectOption,
     FormsModule,
     NgIf,
-    CommonModule
+    CommonModule,
   ],
 })
 export class NewSurveyPage implements OnInit {
@@ -55,9 +52,12 @@ export class NewSurveyPage implements OnInit {
   plataforma = '';
   genero = '';
   comentario = '';
-  image = '';
-  latitud:number | null = null;
-  longitud:number | null = null;
+
+  image: string = '';
+
+  latitud: number | null = null;
+  longitud: number | null = null;
+
   fecha: string = '';
 
   constructor(
@@ -69,100 +69,106 @@ export class NewSurveyPage implements OnInit {
     this.getLocation();
   }
 
-  async showToast(
-    message:string,
-    color:string
-  ){
-
-    const toast =
-      await this.toastController.create({
-
-        message,
-        duration:2000,
-        position:'top',
-        color
-
-      });
+  // TOAST
+  async showToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'top',
+      color
+    });
 
     await toast.present();
-
   }
 
-  async getLocation(){
+  // GPS
+  async getLocation() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
 
-  try {
-
-    const coordinates = await Geolocation.getCurrentPosition();
-
-    this.latitud = coordinates.coords.latitude;
-    this.longitud =
-    coordinates.coords.longitude;
-    console.log(
-        this.latitud,
-        this.longitud
-      );
+      this.latitud = coordinates.coords.latitude;
+      this.longitud = coordinates.coords.longitude;
 
     } catch (error) {
-
-      console.log(error);
-
+      console.log('GPS error:', error);
+      this.latitud = null;
+      this.longitud = null;
     }
   }
 
-  async selectImage(){
+  // CAMERA
+  async selectImage() {
     try {
 
-      const image =
-        await Camera.getPhoto({
-          quality:50,
-          allowEditing:false,
-          resultType: CameraResultType.Base64,
-          source:CameraSource.Prompt
-        });
+      const photo = await Camera.getPhoto({
+        quality: 60,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Prompt
+      });
 
-      this.image = `data:image/jpeg;base64,${image.base64String}`;
+      if (photo.base64String) {
+        this.image = `data:image/jpeg;base64,${photo.base64String}`;
+      }
 
     } catch (error) {
-
-      console.log(error);
-
+      console.log('Camera error:', error);
     }
   }
 
-  async saveSurvey(){
+  // GUARDAR ENCUESTA
+  async saveSurvey() {
 
     try {
+
       this.fecha = new Date().toISOString();
+
+      if (!this.apodo || !this.videojuego || !this.rol) {
+        await this.showToast('Completa los campos obligatorios', 'warning');
+        return;
+      }
+
       await this.surveyService.createSurvey({
-        apodo:this.apodo,
-        edad:this.edad,
-        rol:this.rol,
-        videojuego:this.videojuego,
+        apodo: this.apodo,
+        edad: this.edad,
+        rol: this.rol,
+        videojuego: this.videojuego,
         rating: this.rating,
-        plataforma:this.plataforma,
-        genero:this.genero,
-        comentario:this.comentario,
-        imagen: this.image,
+        plataforma: this.plataforma,
+        genero: this.genero,
+        comentario: this.comentario,
+
+        image: this.image, 
+
         latitud: this.latitud,
         longitud: this.longitud,
         lugar: this.lugar,
-        fecha: this.fecha,
+
+        fecha: this.fecha
       });
 
-      await this.showToast(
-        'Encuesta guardada',
-        'success'
-      );
+      await this.showToast('Encuesta guardada correctamente', 'success');
 
-    } catch (error:any) {
+      this.resetForm();
 
-      await this.showToast(
-        error.message,
-        'danger'
-      );
+    } catch (error: any) {
+
+      await this.showToast(error.message || 'Error al guardar', 'danger');
 
     }
-
   }
 
+  //RESET FORM
+  resetForm() {
+    this.apodo = '';
+    this.edad = null;
+    this.rol = '';
+    this.lugar = '';
+    this.videojuego = '';
+    this.rating = null;
+    this.plataforma = '';
+    this.genero = '';
+    this.comentario = '';
+    this.image = '';
+  }
 }

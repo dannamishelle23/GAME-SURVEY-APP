@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import {
   IonIcon,
@@ -14,7 +14,8 @@ import {
   IonCardTitle,
   IonText,
   IonCardSubtitle,
-  IonCardContent
+  IonCardContent,
+  IonButtons
 } from '@ionic/angular/standalone';
 
 import { CommonModule } from '@angular/common';
@@ -48,7 +49,9 @@ import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icon
     IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    IonCardContent
+    IonCardContent,
+    IonButtons,
+    RouterLink
   ],
 })
 

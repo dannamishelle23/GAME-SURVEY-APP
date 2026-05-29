@@ -1,4 +1,3 @@
-// Quitar la línea divisoria por defecto del header para un look limpio
 ion-header {
   box-shadow: none;
 }
@@ -13,161 +12,170 @@ ion-header {
   -webkit-text-fill-color: transparent;
 }
 
-// Contenedor principal para organizar el contenido verticalmente
 .main-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between; // Mueve el logout al fondo de la pantalla
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-// Tarjeta Hero de Bienvenida
+// Tarjeta de bienvenida
 .welcome-card {
   position: relative;
   background: linear-gradient(135deg, #1e1e2f 0%, #111119 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 32px 24px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  overflow: hidden;
+  padding: 24px;
+  margin-bottom: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 
-  // Efecto de brillo de fondo sutil
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, rgba(56, 128, 255, 0.2) 0%, transparent 70%);
-    transform: rotate(45deg);
-  }
-
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     color: #ffffff;
   }
 
   p {
     color: var(--ion-color-medium);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.4;
     margin: 0;
   }
 }
 
-// Contenedor de los botones de acción
-.menu-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px; // Separa los botones de forma elegante
+.menu-container, .share-container {
+  margin-bottom: 25px;
 }
 
-// Estilo base para los botones principales
 .btn-action {
-  --height: 56px; // Más alto, ideal para uso móvil
+  --height: 52px;
   --border-radius: 14px;
   font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
+  font-size: 0.95rem;
   margin: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  
-  ion-icon {
-    font-size: 1.3rem;
-    margin-right: 8px;
-  }
 }
 
-// Botón con gradiente moderno para llamar la atención
 .btn-primary-gradient {
   background: linear-gradient(90deg, #3880ff 0%, #0053e0 100%);
   border-radius: 14px;
-  --background: transparent; // Permite ver el gradiente del contenedor padre
-}
-
-// Área del botón de salir
-.logout-wrapper {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-logout {
-  font-weight: 600;
-  font-size: 0.95rem;
-  --padding-start: 24px;
-  --padding-end: 24px;
-  
-  ion-icon {
-    margin-right: 6px;
-  }
-}
-
-.surveys-section {
-  margin-top: 20px;
+  --background: transparent;
 }
 
 .section-title {
   color: white;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.survey-card {
+  font-size: 1.2rem;
+  font-weight: 700;
   margin-bottom: 12px;
-  border-radius: 12px;
+  letter-spacing: 0.5px;
 }
 
+// 🔥 CONTENEDOR DE SCROLL HORIZONTAL (Juegos)
 .games-section {
-  margin-top: 20px;
+  margin-bottom: 25px;
+
+  .horizontal-scroll {
+    display: flex;
+    overflow-x: auto;       // Permite deslizar a los lados
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding-bottom: 8px;
+    
+    // Ocultar barra de scroll nativa en navegadores modernos
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .game-scroll-card {
+    flex: 0 0 220px;       // Ancho fijo moderno para cada tarjeta del carrusel
+    scroll-snap-align: start;
+    margin: 0;
+    border-radius: 16px;
+    background: #1c1c1e;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 120px;       // Altura compacta para el carrusel
+      object-fit: cover;
+    }
+
+    ion-card-title {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis; // Añade "..." si el título es muy largo
+    }
+    
+    ion-card-subtitle {
+      font-size: 12px;
+    }
+
+    ion-card-content p {
+      font-size: 11px;
+      color: #888;
+    }
+  }
 }
 
-.games-section ion-card {
-  margin-bottom: 15px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.games-section img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+// 📋 SECCIÓN DE ENCUESTAS (Lista vertical limpia)
+.transparent-list {
+  background: transparent !important;
+  padding: 0;
 }
 
 .rawg-card {
-  margin-bottom: 16px;
-  border-radius: 16px;
+  margin: 0 0 16px 0;
+  border-radius: 20px;
   overflow: hidden;
-  background: #1c1c1c;
+  background: linear-gradient(180deg, #1c1c1e 0%, #121214 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   color: white;
-}
 
-.game-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
+  .game-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
 
-ion-card-title {
-  font-size: 18px;
-  font-weight: bold;
-}
+  ion-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
 
-ion-card-subtitle {
-  color: #aaa;
+  ion-card-content {
+    p {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: #ccc;
+      
+      strong {
+        color: var(--ion-color-medium);
+      }
+    }
+
+    .comment-text {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-style: italic;
+      color: #e0e0e0;
+    }
+  }
 }
 
 .date {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #888;
+  margin-top: 12px !important;
+  font-size: 11px !important;
+  color: #666 !important;
+  text-align: right;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
 }

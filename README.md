@@ -3,12 +3,11 @@
 Aplicación móvil desarrollada con Ionic + Angular para registrar encuestas sobre videojuegos dentro del campus.
 
 ## Tecnologías usadas
-Ionic Angular
-Firebase
-Firestore
-Firebase Storage
-Capacitor
-RAWG API
+- Ionic Angular
+- Firebase
+- Firestore
+- Capacitores de Android
+- RAWG API
 
 ## Creación del proyecto
 ## 1. Crear el proyecto
@@ -32,6 +31,14 @@ ionic serve
 - Compilar proyecto: ionic build
 - Sincronizar Capacitor: npx cap sync
 - Abrir Android Studio: npx cap open android
+
+## Carga de la app a firebase hosting
+
+1. Instalar Firebase CLI: npm install -g firebase tools
+2. Iniciar sesion: firebase login (Se abrirá Google --> Aceptar cuenta) o se verá un mensaje. Ej: "Already logged in as dannamishelle.53@gmail.com"
+3. Inicializar proyecto: firebase init hosting
+
+
 
 # Funcionalidades
 - Registro e inicio de sesión
