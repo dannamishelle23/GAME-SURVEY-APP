@@ -17,26 +17,24 @@ ion-header {
   margin: 0 auto;
 }
 
-// Tarjeta de bienvenida
 .welcome-card {
-  position: relative;
   background: linear-gradient(135deg, #1e1e2f 0%, #111119 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
     margin: 0 0 6px 0;
-    color: #ffffff;
+    color: #ececec;
   }
 
   p {
     color: var(--ion-color-medium);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.4;
     margin: 0;
   }
@@ -47,8 +45,8 @@ ion-header {
 }
 
 .btn-action {
-  --height: 52px;
-  --border-radius: 14px;
+  --height: 50px;
+  --border-radius: 12px;
   font-weight: 600;
   font-size: 0.95rem;
   margin: 0;
@@ -56,126 +54,173 @@ ion-header {
 
 .btn-primary-gradient {
   background: linear-gradient(90deg, #3880ff 0%, #0053e0 100%);
-  border-radius: 14px;
+  border-radius: 12px;
   --background: transparent;
 }
 
 .section-title {
-  color: white;
-  font-size: 1.2rem;
+  color: var(--ion-color-step-850, #490c0c); // Usa el color de texto optimizado de Ionic o blanco puro
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  letter-spacing: 0.3px;
+  border-left: 3px solid var(--ion-color-primary); // Una pequeña línea azul al lado del título para que se vea premium
+  padding-left: 8px;
 }
 
-// 🔥 CONTENEDOR DE SCROLL HORIZONTAL (Juegos)
+// SCROLL HORIZONTAL DE JUEGOS (Rediseñado más pequeño y limpio)
 .games-section {
   margin-bottom: 25px;
 
   .horizontal-scroll {
     display: flex;
-    overflow-x: auto;       // Permite deslizar a los lados
-    scroll-snap-type: x mandatory;
-    gap: 14px;
-    padding-bottom: 8px;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 6px;
     
-    // Ocultar barra de scroll nativa en navegadores modernos
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none;
+    &::-webkit-scrollbar { display: none; }
     scrollbar-width: none;
   }
 
   .game-scroll-card {
-    flex: 0 0 220px;       // Ancho fijo moderno para cada tarjeta del carrusel
-    scroll-snap-align: start;
-    margin: 0;
-    border-radius: 16px;
+    flex: 0 0 160px; // Reducido de 220px a 160px para hacerlo fino
     background: #1c1c1e;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    .img-wrapper {
+      width: 100%;
+      height: 90px; // Reducido de 120px a 90px
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .game-info {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: #1c1c1e;
+
+      .game-title {
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .game-rating {
+        font-size: 11px;
+        color: var(--ion-color-warning, #ffd534);
+      }
+    }
+  }
+}
+
+// 📋 SECCIÓN DE ENCUESTAS (Estilo de ítems ultracompactos)
+.compact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.compact-survey-item {
+  display: flex;
+  background: #1c1c1e;
+  border-radius: 14px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 12px;
+  align-items: flex-start;
+
+  .survey-avatar-wrapper {
+    flex: 0 0 70px;
+    height: 70px;
+    border-radius: 10px;
     overflow: hidden;
 
     img {
       width: 100%;
-      height: 120px;       // Altura compacta para el carrusel
+      height: 100%;
       object-fit: cover;
     }
-
-    ion-card-title {
-      font-size: 14px;
-      overflow: hidden;
-      text-overflow: ellipsis; // Añade "..." si el título es muy largo
-    }
-    
-    ion-card-subtitle {
-      font-size: 12px;
-    }
-
-    ion-card-content p {
-      font-size: 11px;
-      color: #888;
-    }
-  }
-}
-
-// 📋 SECCIÓN DE ENCUESTAS (Lista vertical limpia)
-.transparent-list {
-  background: transparent !important;
-  padding: 0;
-}
-
-.rawg-card {
-  margin: 0 0 16px 0;
-  border-radius: 20px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #1c1c1e 0%, #121214 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: white;
-
-  .game-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
   }
 
-  ion-card-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: white;
-  }
+  .survey-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-  ion-card-content {
-    p {
-      margin-bottom: 6px;
-      font-size: 0.9rem;
-      color: #ccc;
-      
-      strong {
-        color: var(--ion-color-medium);
+    .survey-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+
+      h3 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: white;
+        max-width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .badge-rating {
+        font-size: 11px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 2px 6px;
+        border-radius: 6px;
+        color: #fff;
       }
     }
 
-    .comment-text {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 10px;
-      border-radius: 10px;
-      margin-top: 10px;
+    .meta-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 6px;
+
+      strong { color: white; }
+    }
+
+    .comment-bubble {
+      margin: 4px 0;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #ddd;
       font-style: italic;
-      color: #e0e0e0;
+      border-left: 2px solid var(--ion-color-primary);
+    }
+
+    .compact-date {
+      font-size: 10px;
+      color: #555;
+      text-align: right;
+      margin-top: 4px;
     }
   }
-}
-
-.date {
-  margin-top: 12px !important;
-  font-size: 11px !important;
-  color: #666 !important;
-  text-align: right;
 }
 
 .empty-state {
   text-align: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 12px;
 }

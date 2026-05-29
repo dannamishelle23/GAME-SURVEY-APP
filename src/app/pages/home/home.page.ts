@@ -1,60 +1,44 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icons';
+
+// Importaciones de servicios
+import { AuthService } from 'src/app/services/auth';
+import { SurveyService } from 'src/app/services/survey';
+import { RawgService } from 'src/app/services/rawg.service';
 
 import {
   IonIcon,
   IonContent,
   IonHeader,
   IonToolbar,
-  IonList,
   IonTitle,
   IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
   IonText,
-  IonCardSubtitle,
-  IonCardContent,
   IonButtons
 } from '@ionic/angular/standalone';
-
-import { CommonModule } from '@angular/common';
-
-import { AuthService } from 'src/app/services/auth';
-import { SurveyService } from 'src/app/services/survey';
-
-import { Subscription } from 'rxjs';
-
-import { addIcons } from 'ionicons';
-
-import { RawgService } from 'src/app/services/rawg.service';
-
-import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'], // Asegúrate de mantener tu ruta de estilos si la usas
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     IonContent,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonButton,
     IonIcon,
-    IonList,
     IonText,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonButtons,
-    RouterLink
+    IonButtons
   ],
 })
-
 export class HomePage implements OnInit, OnDestroy {
 
   encuestas: any[] = [];

@@ -53,12 +53,12 @@ export class NewSurveyPage implements OnInit {
   genero = '';
   comentario = '';
 
-  image: string = '';
+  image = '';
 
   latitud: number | null = null;
   longitud: number | null = null;
 
-  fecha: string = '';
+  fecha = '';
 
   constructor(
     private surveyService: SurveyService,
@@ -69,13 +69,15 @@ export class NewSurveyPage implements OnInit {
     this.getLocation();
   }
 
-  // TOAST
+  // TOAST MEJORADO (IMPORTANTE PARA DEPLOY)
   async showToast(message: string, color: string) {
+
     const toast = await this.toastController.create({
       message,
       duration: 2000,
       position: 'top',
-      color
+      color,
+      cssClass: 'custom-toast'
     });
 
     await toast.present();
@@ -83,14 +85,14 @@ export class NewSurveyPage implements OnInit {
 
   // GPS
   async getLocation() {
+
     try {
       const coordinates = await Geolocation.getCurrentPosition();
 
       this.latitud = coordinates.coords.latitude;
       this.longitud = coordinates.coords.longitude;
 
-    } catch (error) {
-      console.log('GPS error:', error);
+    } catch {
       this.latitud = null;
       this.longitud = null;
     }
@@ -98,6 +100,7 @@ export class NewSurveyPage implements OnInit {
 
   // CAMERA
   async selectImage() {
+
     try {
 
       const photo = await Camera.getPhoto({
@@ -107,16 +110,16 @@ export class NewSurveyPage implements OnInit {
         source: CameraSource.Prompt
       });
 
-      if (photo.base64String) {
-        this.image = `data:image/jpeg;base64,${photo.base64String}`;
-      }
+      this.image = photo.base64String
+        ? `data:image/jpeg;base64,${photo.base64String}`
+        : '';
 
-    } catch (error) {
-      console.log('Camera error:', error);
+    } catch {
+      // silent
     }
   }
 
-  // GUARDAR ENCUESTA
+  // SAVE
   async saveSurvey() {
 
     try {
@@ -137,29 +140,31 @@ export class NewSurveyPage implements OnInit {
         plataforma: this.plataforma,
         genero: this.genero,
         comentario: this.comentario,
-
-        image: this.image, 
-
+        image: this.image,
         latitud: this.latitud,
         longitud: this.longitud,
         lugar: this.lugar,
-
         fecha: this.fecha
       });
 
-      await this.showToast('Encuesta guardada correctamente', 'success');
-
       this.resetForm();
+
+      setTimeout(async () => {
+        await this.showToast('Encuesta guardada correctamente', 'success');
+      }, 150);
 
     } catch (error: any) {
 
-      await this.showToast(error.message || 'Error al guardar', 'danger');
-
+      await this.showToast(
+        error.message || 'Error al guardar',
+        'danger'
+      );
     }
   }
 
-  //RESET FORM
+  // RESET COMPLETO 
   resetForm() {
+
     this.apodo = '';
     this.edad = null;
     this.rol = '';
@@ -170,5 +175,8 @@ export class NewSurveyPage implements OnInit {
     this.genero = '';
     this.comentario = '';
     this.image = '';
+
+    // refrescar GPS
+    this.getLocation();
   }
 }

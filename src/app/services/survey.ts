@@ -23,62 +23,62 @@ export class SurveyService {
   private apiKey = '7e5404871d8d40cdbc5c750dc6897eed';
   private baseUrl = 'https://api.rawg.io/api';
 
-  // CREAR ENCUESTA
+  // CREAR ENCUESTA (CLEAN + PRODUCTION READY)
   async createSurvey(data: any) {
+
+    let game = null;
 
     try {
       const gameData: any = await firstValueFrom(
         this.getGameInfo(data.videojuego)
       );
 
-      const game = gameData?.results?.[0];
-
-      const surveysCollection = collection(this.firestore, 'encuestas');
-
-      return await addDoc(surveysCollection, {
-        ...data,
-
-        // RAWG INFO
-        gameInfo: {
-          name: game?.name || data.videojuego,
-          image: game?.background_image || null,
-          rating: game?.rating || null,
-          genres: game?.genres || [],
-          platforms: game?.platforms || []
-        },
-
-        createdAt: serverTimestamp()
-      });
+      game = gameData?.results?.[0];
 
     } catch (error) {
-
-      // fallback si RAWG falla
-      const surveysCollection = collection(this.firestore, 'encuestas');
-
-      return await addDoc(surveysCollection, {
-        ...data,
-
-        gameInfo: {
-          name: data.videojuego,
-          image: null,
-          rating: null,
-          genres: [],
-          platforms: []
-        },
-
-        createdAt: serverTimestamp()
-      });
+      game = null;
     }
+
+    const surveysCollection = collection(this.firestore, 'encuestas');
+
+    const payload = {
+      apodo: data.apodo,
+      edad: data.edad,
+      rol: data.rol,
+      videojuego: data.videojuego,
+      plataforma: data.plataforma,
+      genero: data.genero,
+      comentario: data.comentario,
+
+      imagen: data.image || null,
+
+      latitud: data.latitud,
+      longitud: data.longitud,
+      lugar: data.lugar,
+      fecha: data.fecha,
+
+      gameInfo: {
+        name: game?.name || data.videojuego,
+        image: game?.background_image || null,
+        rating: game?.rating || null,
+        genres: game?.genres || [],
+        platforms: game?.platforms || []
+      },
+
+      createdAt: serverTimestamp()
+    };
+
+    return await addDoc(surveysCollection, payload);
   }
 
-  // BUSCAR JUEGO
+  // RAWG API
   getGameInfo(name: string): Observable<any> {
     return this.http.get(
       `${this.baseUrl}/games?search=${name}&key=${this.apiKey}`
     );
   }
 
-  // LEER ENCUESTAS
+  // OBTENER ENCUESTAS
   getSurveys(): Observable<any[]> {
     const ref = collection(this.firestore, 'encuestas');
 

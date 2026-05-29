@@ -14,7 +14,6 @@
   <div class="main-container">
 
     <div class="welcome-card">
-      <div class="overlay"></div>
       <div class="card-content">
         <h1>Bienvenido!</h1>
         <p>Tu opinión cuenta en el campus. Gestiona y responde encuestas activas.</p>
@@ -35,57 +34,57 @@
       <h2 class="section-title">🎮 Juegos populares</h2>
       
       <div class="horizontal-scroll">
-        <ion-card *ngFor="let game of games" class="game-scroll-card">
-          <img [src]="game.background_image" />
-          <ion-card-header>
-            <ion-card-title class="ion-text-nowrap">{{ game.name }}</ion-card-title>
-            <ion-card-subtitle>⭐ {{ game.rating }} / 5</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <p>📅 {{ game.released }}</p>
-          </ion-card-content>
-        </ion-card>
+        <div *ngFor="let game of games" class="game-scroll-card">
+          <div class="img-wrapper">
+            <img [src]="game.background_image" />
+          </div>
+          <div class="game-info">
+            <span class="game-title">{{ game.name }}</span>
+            <span class="game-rating">⭐ {{ game.rating }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="surveys-section">
       <h2 class="section-title">Encuestas recientes</h2>
 
-      <ion-list *ngIf="encuestas.length > 0; else empty" class="transparent-list">
-        <ion-card *ngFor="let e of encuestas" class="rawg-card">
-          <img
-            *ngIf="e.gameInfo?.image"
-            [src]="e.gameInfo.image"
-            class="game-image"
-          />
+      <div *ngIf="encuestas.length > 0; else empty" class="compact-list">
+        
+        <div *ngFor="let e of encuestas" class="compact-survey-item">
+          
+          <div class="survey-avatar-wrapper" *ngIf="e.gameInfo?.image">
+            <img [src]="e.gameInfo.image" />
+          </div>
 
-          <ion-card-header>
-            <ion-card-title>
-              🎮 {{ e.gameInfo?.name || e.videojuego }}
-            </ion-card-title>
-            <ion-card-subtitle>
-              ⭐ Rating: {{ e.gameInfo?.rating || 'N/A' }}
-            </ion-card-subtitle>
-          </ion-card-header>
+          <div class="survey-details">
+            <div class="survey-header">
+              <h3>{{ e.gameInfo?.name || e.videojuego }}</h3>
+              <span class="badge-rating" *ngIf="e.gameInfo?.rating">⭐ {{ e.gameInfo?.rating }}</span>
+            </div>
 
-          <ion-card-content>
-            <p><strong>👤 Apodo:</strong> {{ e.apodo }}</p>
-            <p><strong>🎭 Rol:</strong> {{ e.rol }}</p>
-            <p><strong>📍 Lugar:</strong> {{ e.lugar }}</p>
-            <p class="comment-text" *ngIf="e.comentario">💬 "{{ e.comentario }}"</p>
+            <div class="meta-grid">
+              <span>👤 <strong>{{ e.apodo }}</strong></span>
+              <span>🎭 {{ e.rol }}</span>
+              <span>📍 {{ e.lugar }}</span>
+            </div>
 
-            <p class="date">
-              📅 {{ e.createdAt?.toDate() | date:'short' }}
+            <p *ngIf="e.comentario" class="comment-bubble">
+              "{{ e.comentario }}"
             </p>
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
+
+            <span class="compact-date">
+              {{ e.createdAt?.toDate() | date:'short' }}
+            </span>
+          </div>
+
+        </div>
+
+      </div>
 
       <ng-template #empty>
         <div class="empty-state">
-          <ion-text color="medium">
-            Aún no hay encuestas registradas
-          </ion-text>
+          <ion-text color="medium">Aún no hay encuestas registradas</ion-text>
         </div>
       </ng-template>
     </div>
