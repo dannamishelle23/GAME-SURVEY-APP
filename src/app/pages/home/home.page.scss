@@ -126,3 +126,48 @@ ion-header {
   margin-bottom: 12px;
   border-radius: 12px;
 }
+
+.games-section {
+  margin-top: 20px;
+}
+
+.games-section ion-card {
+  margin-bottom: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.games-section img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.rawg-card {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1c1c1c;
+  color: white;
+}
+
+.game-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+ion-card-subtitle {
+  color: #aaa;
+}
+
+.date {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+}

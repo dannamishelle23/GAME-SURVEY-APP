@@ -47,15 +47,18 @@ import { SurveyService } from 'src/app/services/survey';
 export class NewSurveyPage implements OnInit {
 
   apodo = '';
-  edad = '';
+  edad: number | null = null;
   rol = '';
+  lugar = '';
   videojuego = '';
+  rating: number | null = null;
   plataforma = '';
   genero = '';
   comentario = '';
   image = '';
   latitud:number | null = null;
   longitud:number | null = null;
+  fecha: string = '';
 
   constructor(
     private surveyService: SurveyService,
@@ -117,7 +120,7 @@ export class NewSurveyPage implements OnInit {
           source:CameraSource.Prompt
         });
 
-      this.image = `data:image/jpeg;base64, ${image.base64String}`;
+      this.image = `data:image/jpeg;base64,${image.base64String}`;
 
     } catch (error) {
 
@@ -129,18 +132,21 @@ export class NewSurveyPage implements OnInit {
   async saveSurvey(){
 
     try {
-
+      this.fecha = new Date().toISOString();
       await this.surveyService.createSurvey({
         apodo:this.apodo,
         edad:this.edad,
         rol:this.rol,
         videojuego:this.videojuego,
+        rating: this.rating,
         plataforma:this.plataforma,
         genero:this.genero,
         comentario:this.comentario,
         imagen: this.image,
         latitud: this.latitud,
-        longitud: this.longitud
+        longitud: this.longitud,
+        lugar: this.lugar,
+        fecha: this.fecha,
       });
 
       await this.showToast(

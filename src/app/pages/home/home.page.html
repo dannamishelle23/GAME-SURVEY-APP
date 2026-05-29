@@ -28,31 +28,78 @@
 
     </div>
 
+    <div class="games-section">
+      <h2 class="section-title">🎮 Juegos populares</h2>
+
+      <ion-card *ngFor="let game of games">
+
+        <img [src]="game.background_image" />
+
+        <ion-card-header>
+          <ion-card-title>
+            {{ game.name }}
+          </ion-card-title>
+
+          <ion-card-subtitle>
+            ⭐ {{ game.rating }} / 5
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>📅 Lanzamiento: {{ game.released }}</p>
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
     <div class="surveys-section">
 
       <h2 class="section-title">Encuestas recientes</h2>
 
       <ion-list *ngIf="encuestas.length > 0; else empty">
 
-        <ion-card *ngFor="let e of encuestas" class="survey-card">
+       <div class="surveys-section">
+
+    <ion-card *ngFor="let e of encuestas" class="rawg-card">
+          <!-- IMAGEN DEL JUEGO -->
+          <img
+            *ngIf="e.gameInfo?.image"
+            [src]="e.gameInfo.image"
+            class="game-image"
+          />
 
           <ion-card-header>
+
             <ion-card-title>
-              🎮 {{ e.videojuego }}
+              🎮 Videojuego favorito: {{ e.gameInfo?.name || e.videojuego }}
             </ion-card-title>
+
             <ion-card-subtitle>
-              {{ e.plataforma }} • {{ e.genero }}
+              ⭐ Rating: {{ e.gameInfo?.rating || 'N/A' }}
             </ion-card-subtitle>
+
           </ion-card-header>
 
           <ion-card-content>
-            <p><strong>Nombre/apodo:</strong> {{ e.apodo }}</p>
-            <p><strong>Edad:</strong> {{ e.edad }}</p>
-            <p><strong>Rol:</strong> {{ e.rol }}</p>
-            <p>{{ e.comentario }}</p>
+
+            <p><strong>👤Nombre: </strong> {{ e.apodo }}</p>
+
+            <p><strong>🎭 Rol:</strong> {{ e.rol }}</p>
+
+            <p><strong>📍 Lugar:</strong> {{ e.lugar }}</p>
+
+            <p><strong>💬:</strong> {{ e.comentario || 'N/A' }}</p>
+
+            <p class="date">
+              📅 {{ e.createdAt?.toDate() | date:'short' }}
+            </p>
+
           </ion-card-content>
 
         </ion-card>
+
+      </div>
 
       </ion-list>
 

@@ -32,6 +32,8 @@ import {
   getFirestore
 } from '@angular/fire/firestore';
 
+import { provideHttpClient } from '@angular/common/http';
+
 bootstrapApplication(AppComponent, {
 
   providers: [
@@ -54,7 +56,9 @@ bootstrapApplication(AppComponent, {
 
     provideAuth(() => getAuth()),
 
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+
+    provideHttpClient()
 
   ],
 

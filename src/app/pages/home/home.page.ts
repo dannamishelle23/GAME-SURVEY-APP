@@ -25,6 +25,9 @@ import { SurveyService } from 'src/app/services/survey';
 import { Subscription } from 'rxjs';
 
 import { addIcons } from 'ionicons';
+
+import { RawgService } from 'src/app/services/rawg.service';
+
 import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icons';
 
 @Component({
@@ -48,15 +51,18 @@ import { addCircleOutline, clipboardOutline, logOutOutline } from 'ionicons/icon
     IonCardContent
   ],
 })
+
 export class HomePage implements OnInit, OnDestroy {
 
   encuestas: any[] = [];
+  games: any[] = [];
   private sub!: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private surveyService: SurveyService
+    private surveyService: SurveyService,
+    private rawgService: RawgService
   ) {
     addIcons({
       addCircleOutline,
@@ -67,11 +73,18 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadSurveys();
+    this.loadGames();
   }
 
   loadSurveys() {
     this.sub = this.surveyService.getSurveys().subscribe(data => {
       this.encuestas = data;
+    });
+  }
+
+  loadGames() {
+    this.rawgService.getGames().subscribe(res => {
+      this.games = res.results;
     });
   }
 
