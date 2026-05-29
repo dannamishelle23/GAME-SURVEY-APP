@@ -39,7 +39,6 @@ ionic serve
 3. Inicializar proyecto: firebase init hosting
 
 
-
 # Funcionalidades
 - Registro e inicio de sesión
 - Encuestas de videojuegos
