@@ -4,33 +4,35 @@ import {
   Firestore,
   collection,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  collectionData
 } from '@angular/fire/firestore';
+
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
 
-  private firestore =
-    inject(Firestore);
+  private firestore = inject(Firestore);
 
-  async createSurvey(data:any){
+  // CREAR ENCUESTA
+  async createSurvey(data: any) {
+    const ref = collection(this.firestore, 'encuestas');
 
-    const surveysCollection =
-      collection(
-        this.firestore,
-        'encuestas'
-      );
-
-    return await addDoc(
-      surveysCollection,
-      {
-        ...data,
-        createdAt: serverTimestamp()
-      }
-    );
-
+    return await addDoc(ref, {
+      ...data,
+      createdAt: serverTimestamp()
+    });
   }
 
+  // LEER ENCUESTAS
+  getSurveys(): Observable<any[]> {
+    const ref = collection(this.firestore, 'encuestas');
+
+    return collectionData(ref, {
+      idField: 'id'
+    });
+  }
 }
