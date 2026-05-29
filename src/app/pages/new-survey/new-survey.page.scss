@@ -1,0 +1,91 @@
+ion-content {
+
+  --background:
+    linear-gradient(
+      180deg,
+      #111827,
+      #1f2937
+    );
+
+}
+
+.survey-container {
+
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 25px;
+
+  margin-top: 20px;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.2);
+
+}
+
+h1 {
+
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #111827;
+}
+
+p {
+  text-align: center;
+  color: #6b7280;
+}
+
+ion-input,
+ion-select,
+ion-textarea {
+  margin-top: 10px;
+}
+
+.image-btn {
+
+  margin-top: 20px;
+
+}
+
+.preview-container {
+
+  margin-top: 20px;
+
+  display: flex;
+
+  justify-content: center;
+
+}
+
+.preview-image {
+
+  width: 100%;
+
+  border-radius: 20px;
+
+  object-fit: cover;
+
+  max-height: 300px;
+
+}
+
+.gps-box {
+
+  margin-top: 20px;
+
+  background: #f3f4f6;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+}
+
+.save-btn {
+  margin-top: 20px;
+  --background: #1d093f;
+  font-weight: bold;
+
+}

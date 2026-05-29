@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
     private toastController: ToastController
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     const user = this.authService.getCurrentUser();
     if (user) {
       this.router.navigate(['home'])

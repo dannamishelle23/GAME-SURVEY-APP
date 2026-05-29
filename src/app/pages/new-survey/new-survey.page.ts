@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
+
+import { NgIf, CommonModule } from '@angular/common';
 
 import {
   IonContent,
@@ -15,6 +17,10 @@ import {
 } from '@ionic/angular/standalone';
 
 import { ToastController } from '@ionic/angular';
+
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
+import { Geolocation } from '@capacitor/geolocation';
 
 import { SurveyService } from 'src/app/services/survey';
 
@@ -33,10 +39,12 @@ import { SurveyService } from 'src/app/services/survey';
     IonTextarea,
     IonSelect,
     IonSelectOption,
-    FormsModule
+    FormsModule,
+    NgIf,
+    CommonModule
   ],
 })
-export class NewSurveyPage {
+export class NewSurveyPage implements OnInit {
 
   apodo = '';
   edad = '';
@@ -45,11 +53,18 @@ export class NewSurveyPage {
   plataforma = '';
   genero = '';
   comentario = '';
+  image = '';
+  latitud:number | null = null;
+  longitud:number | null = null;
 
   constructor(
     private surveyService: SurveyService,
     private toastController: ToastController
   ) {}
+
+  ngOnInit() {
+    this.getLocation();
+  }
 
   async showToast(
     message:string,
@@ -70,6 +85,47 @@ export class NewSurveyPage {
 
   }
 
+  async getLocation(){
+
+  try {
+
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    this.latitud = coordinates.coords.latitude;
+    this.longitud =
+    coordinates.coords.longitude;
+    console.log(
+        this.latitud,
+        this.longitud
+      );
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+  }
+
+  async selectImage(){
+    try {
+
+      const image =
+        await Camera.getPhoto({
+          quality:50,
+          allowEditing:false,
+          resultType: CameraResultType.Base64,
+          source:CameraSource.Prompt
+        });
+
+      this.image = `data:image/jpeg;base64, ${image.base64String}`;
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+  }
+
   async saveSurvey(){
 
     try {
@@ -81,8 +137,10 @@ export class NewSurveyPage {
         videojuego:this.videojuego,
         plataforma:this.plataforma,
         genero:this.genero,
-        comentario:this.comentario
-
+        comentario:this.comentario,
+        imagen: this.image,
+        latitud: this.latitud,
+        longitud: this.longitud
       });
 
       await this.showToast(
